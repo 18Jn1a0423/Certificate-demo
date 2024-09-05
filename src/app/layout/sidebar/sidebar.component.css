@@ -1,0 +1,31 @@
+.primary-nav {
+    grid-area: primary-nav;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    background: #283037;
+    color: #ffffff;
+    padding: 10px;
+    height: 100vh;
+  }
+  
+  .action-text {
+    display: block;
+    margin-left: 1rem;
+    font-size: 1.25rem;
+    /* background: url(images/hs-logo-01.svg) no-repeat top left; */
+  }
+  
+  ul.main-nav {
+    li {
+      margin: 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 300;
+  
+      &:nth-child(2) {
+        margin: 1rem;
+        font-size: 1.5rem;
+        font-weight: 300;
+      }
+    }
+  }
+  

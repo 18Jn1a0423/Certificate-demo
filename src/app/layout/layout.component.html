@@ -1,0 +1,33 @@
+
+    <main class="container side-panel-hidden">
+        <app-sidebar></app-sidebar>
+        <div class="content">
+            <div class="grid panel">
+                <div class="panel-header">
+                    <span class="header-title">CSS Grid Layout</span>
+                </div>
+                <router-outlet></router-outlet>
+            </div>
+        </div>   
+        <div class="side-dialog slideLeft">
+            <form class="dialog panel with-footer">
+                <div class="panel-header"></div>
+                <div class="panel-footer">
+                    <button type="button" class="btn pull-right" id="toggle-cancel-button">Cancel</button>
+                </div>
+                <div class="panel-content">
+                    <div class="form-box">
+                        <legend>Block One</legend>
+                    </div>
+                    <div class="form-box">
+                        <legend>Block Two</legend>
+                    </div>
+                    <div class="form-box">
+                        <legend>Block Three</legend>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    

@@ -1,0 +1,50 @@
+<p-toast />
+<div>
+    <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()">
+        <div class="field grid">
+            <label for="exampleFormControlInput1" class="form-label">Certificate Name</label>
+            <input class="p-inputtext-sm" pInputText type="text"  id="exampleFormControlInput1"
+                formControlName="certificateName" placeholder="enter ">
+        </div>
+        <div class="field grid">
+            <label for="exampleFormControlInput1" class="form-label">userEmail</label>
+            <input class="p-inputtext-sm" pInputText type="email"  id="exampleFormControlInput1"
+                formControlName="userEmail" placeholder="email@example.com">
+        </div>
+        <div class="field grid">
+            <label for="exampleFormControlInput1" class="form-label"> File Type</label>
+            <div class="form-check">
+                <input class="p-inputtext-sm" pInputText class="form-check-input" type="radio" id="flexRadioDefault1" value="PDF"
+                    formControlName="fileType">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    PDF
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="p-inputtext-sm" pInputText class="form-check-input" type="radio" id="flexRadioDefault2" value="CSV"
+                    formControlName="fileType">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    CSV
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="p-inputtext-sm" pInputText class="form-check-input" type="radio" id="flexRadioDefault3" value="DOCX"
+                    formControlName="fileType">
+                <label class="form-check-label" for="flexRadioDefault3">
+                    DOCX
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="p-inputtext-sm" pInputText class="form-check-input" type="radio" id="flexRadioDefault4" value="XLS"
+                    formControlName="fileType">
+                <label class="form-check-label" for="flexRadioDefault4">
+                    EXCEL
+                </label>
+            </div>
+        </div>
+        <div style="display: flex;justify-content: end;">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

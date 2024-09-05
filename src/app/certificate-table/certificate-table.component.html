@@ -1,0 +1,94 @@
+<div  style="display: flex;
+justify-content: end;margin-top:10px;">
+    <button pButton  (click)="showDialog()">Add Certificate</button>
+</div>
+ 
+
+  <p-table [value]="tableRows" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Certificate Name</th>
+        <th>Email</th>
+        <th>Created By</th>
+        <th>Expiring Date</th>
+        <th>Reporting Manager</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.certificateName }}</td>
+        <td>{{ item.userEmail }}</td>
+        <td>{{ item.createdBy }}</td>
+        <td>{{ item.expiryDate }}</td>
+        <td>{{ item.reportManager }}</td>
+        <td style="display: flex;gap:10px;">
+          <button pButton type="button" size="small" icon="pi pi-pencil" class="p-button-outlined p-button-warning"  (click)="editCertificate(item.id)">Edit</button>
+          <button pButton type="button" size="small" icon="pi pi-download" class="p-button-outlined p-button-secondary" (click)="downloadCertificate(item.id, item.fileType)">Download</button>
+          <button pButton type="button" size="small" icon="pi pi-download" class="p-button-outlined "severity="danger" (click)="downloadCertificate(item.id, item.fileType)">Delete</button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  
+
+  <div>
+    <div class="card flex justify-content-center">
+        <p-dialog header="Add Certificate" [(visible)]="visible"  [style]="{width: '50vw', 'height':'60vh'}">
+            <p-toast />
+            <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()" class="p-fluid"s>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" >Certificate Name</label>
+                  <input pInputText class="p-inputtext-sm"  type="text" style="margin-bottom:10px ;" formControlName="certificateName" placeholder="enter ">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" >userEmail</label>
+                  <input pInputText  class="p-inputtext-sm" type="email" style="margin-bottom:10px ;" formControlName="userEmail" placeholder="email@example.com">
+                </div>
+                <div style="margin-top: 10px;">
+                  <button pButton class="btn btn-primary" type="submit">Submit</button>
+                </div>
+              </form>
+            
+        </p-dialog>
+    </div>
+  </div>
+
+
+
+
+
+  <div>
+    <div class="card flex justify-content-center">
+        <p-dialog header="Update Certificate" [(visible)]="visibleEdit" [style]="{width: '50vw', 'height':'60vh'}">
+            <p-toast />
+            <div>
+                <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()" class="p-fluid">
+                    <div class="field" style=" margin-top: 10px;" >
+                      <label for="certificateName" class="form-label">Certificate Name</label>
+                      <input class="p-inputtext-sm" readonly pInputText type="text" id="certificateName"
+                             formControlName="certificateName" placeholder="Enter certificate name">
+                    </div>
+                  
+                    <div class="field" style=" margin-top: 10px;">
+                      <label for="userEmail" class="form-label">User Email</label>
+                      <input class="p-inputtext-sm" readonly pInputText type="email" id="userEmail"
+                             formControlName="userEmail" placeholder="email@example.com">
+                    </div>
+                  
+                    <div class="field" style=" margin-top: 10px;">
+                      <label for="expiryDate" class="form-label">Expiry Date</label>
+                      <p-calendar id="expiryDate" [touchUI]="true" [showIcon]="true" formControlName="expiryDate"></p-calendar>
+                    </div>
+                  
+                    <div class="field" style="text-align: right; margin-top: 10px;">
+                      <button pButton type="submit" label="Submit"></button>
+                    </div>
+                  </form>
+                  
+            </div>
+            
+        </p-dialog>
+    </div>
+  </div>
