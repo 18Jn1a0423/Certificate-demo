@@ -36,6 +36,7 @@ BASED ON REQUIREMENT-
 
 API's
 POST-localhost:8081/api/certificates/add
+
 {
     "certificateName": "GCP",
     "fileType": "xls",
@@ -45,6 +46,7 @@ POST-localhost:8081/api/certificates/add
     "reportDirector": "Director@gmail.com"
    
 }
+
 
 GET-localhost:8081/api/certificates/all
 
