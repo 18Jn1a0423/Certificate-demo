@@ -12,6 +12,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mss.demo.concrete.CertificateGenerator;
 import com.mss.demo.entity.Certificate;
@@ -38,7 +39,9 @@ public class FileProcessingService {
 		LocalDate createDate = LocalDate.now();
 
 		// Calculate the expiry date based on the isMonthly parameter
-		LocalDate expiryDate = isMonthly ? createDate.plusMonths(1) : createDate.plusWeeks(1);
+//		LocalDate expiryDate = isMonthly ? createDate.plusMonths(1) : createDate.plusWeeks(1);
+		  LocalDate expiryDate = request.getExpiryDate() != null ? request.getExpiryDate()
+		            : (isMonthly ? createDate.plusMonths(1) : createDate.plusWeeks(1));
 
 		CertificateGenerator generator = certificateGenerators.stream()
 				.filter(g -> g.getFileExtension().equalsIgnoreCase(request.getFileType())).findFirst()
@@ -193,6 +196,7 @@ public class FileProcessingService {
 		System.out.println("Certificate renewed. New expiry date: " + newExpiryDate);
 	}
 
+    @Transactional
 	public void deleteCertificatesByUserEmail(String userEmail) {
 		List<Certificate> certificates = certificateRepository.findByUserEmail(userEmail);
 
