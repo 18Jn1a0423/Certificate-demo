@@ -38,12 +38,19 @@ API's
 POST-localhost:8081/api/certificates/add
 
 {
+
     "certificateName": "GCP",
+    
     "fileType": "xls",
+    
     "userEmail": "litchiroyal@example.com",
+    
     "createdBy": "Admin",
+    
     "reportManager": "Manager@gmail.com",
+    
     "reportDirector": "Director@gmail.com"
+    
    
 }
 
@@ -59,11 +66,17 @@ GET-localhost:8081/api/certificates/download/
 GET-http://localhost:8081/api/certificates/check-expirations
 
 PUT-http://localhost:8081/api/certificates/update/{id}
+
 {
+
     "certificateName": "Security",
+   
     "userEmail": "user@example.com",
+    
     "fileType": "CSV",
+  
     "reportManager":"selvan@mail.com"
+    
 }
 
 DELETE-http://localhost:8081/api/certificates/delete?userEmail=prakashdevagalla@gmail.com
