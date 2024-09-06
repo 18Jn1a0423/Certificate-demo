@@ -35,7 +35,7 @@ BASED ON REQUIREMENT-
    - Notify users of certificates that are expiring soon, with details of those certificates.
 
 API's
-POST-localhost:8081/api/certificates/add
+**POST-localhost:8081/api/certificates/add**
 
 {
 
@@ -55,17 +55,20 @@ POST-localhost:8081/api/certificates/add
 }
 
 
-GET-localhost:8081/api/certificates/all
+**GET-localhost:8081/api/certificates/all**
 
-GET-localhost:8081/api/certificates/fileType?fileType=csv
+**GET-localhost:8081/api/certificates/fileType?fileType=csv**
 
-GET-localhost:8081/api/certificates/download?fileType=pdf&Id=1
+**GET-localhost:8081/api/certificates/download?fileType=pdf&Id=1**
 
-GET-localhost:8081/api/certificates/download/
+![image](https://github.com/user-attachments/assets/327e5404-6ab1-4cff-9b96-1838a2ab8036)
 
-GET-http://localhost:8081/api/certificates/check-expirations
 
-PUT-http://localhost:8081/api/certificates/update/{id}
+**GET-localhost:8081/api/certificates/download/**
+
+**GET-http://localhost:8081/api/certificates/check-expirations**
+
+**PUT-http://localhost:8081/api/certificates/update/{id}**
 
 {
 
