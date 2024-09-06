@@ -11,23 +11,23 @@ The system needs to monitor certificates that are nearing their expiration date,
    - One week (weekly check): Certificates expiring within 7 days.
    - One month (monthly check): Certificates expiring within 30 days.
 
-** 2. Scheduled Task:**
+**2. Scheduled Task:**
    
    - A scheduled job runs daily at midnight to check for certificates expiring within the next week and month.
    - If certificates are found to be expiring soon, specific actions are triggered, such as logging the number of expiring certificates and potentially sending notifications.
 
-** 3. Email Notification:**
+**3. Email Notification:**
   
    - If certificates are found expiring within the next week or month, the system should notify relevant parties by sending an email with the details of the expiring certificates.
 
-** 4. API Endpoint:**
+**4. API Endpoint:**
    
    - The system exposes a REST API endpoint `/expiring-soon` that:
      - Returns a list of certificates that are expiring within the next 7 days (weekly) and within the next 30 days (monthly).
      - Optionally, the scheduled task for expiring certificates is triggered manually when this API is called.
 
 
-** Functional Requirements Summary:**
+**Functional Requirements Summary:**
  
 **1. Certificate Expiration Check (Weekly and Monthly):**
 
@@ -49,7 +49,7 @@ The system needs to monitor certificates that are nearing their expiration date,
 
 API's
 
-POST-localhost:8081/api/certificates/add
+**POST-localhost:8081/api/certificates/add**
 
 {
 
@@ -69,20 +69,20 @@ POST-localhost:8081/api/certificates/add
 }
 
 
-GET-http://localhost:8081/api/certificates/all
+**GET-http://localhost:8081/api/certificates/all**
 
-GET-http://localhost:8081/api/certificates/fileType?fileType=csv
+**GET-http://localhost:8081/api/certificates/fileType?fileType=csv**
 
-GET-http://localhost:8081/api/certificates/download?fileType=pdf&Id=1
+**GET-http://localhost:8081/api/certificates/download?fileType=pdf&Id=1**
 
 ![image](https://github.com/user-attachments/assets/327e5404-6ab1-4cff-9b96-1838a2ab8036)
 
 
-GET-http://localhost:8081/api/certificates/download/
+**GET-http://localhost:8081/api/certificates/download/**
 
-GET-http://localhost:8081/api/certificates/check-expirations
+**GET-http://localhost:8081/api/certificates/check-expirations**
 
-PUT-http://localhost:8081/api/certificates/update/{id}
+**PUT-http://localhost:8081/api/certificates/update/{id}**
 
 {
 
