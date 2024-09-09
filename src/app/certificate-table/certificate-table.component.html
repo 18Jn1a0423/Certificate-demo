@@ -46,6 +46,11 @@ justify-content: end;margin-top:10px;">
                   <label for="exampleFormControlInput1" >userEmail</label>
                   <input pInputText  class="p-inputtext-sm" type="email" style="margin-bottom:10px ;" formControlName="userEmail" placeholder="email@example.com">
                 </div>
+                <div class="field" style=" margin-top: 10px;">
+                  <label for="expiryDate" class="form-label">Expiry Date</label>
+                  <!-- <p-calendar id="expiryDate" [touchUI]="true" [showIcon]="true" formControlName="expiryDate"></p-calendar> -->
+                  <p-calendar [touchUI]="true" [showIcon]="true" formControlName="expiryDate"></p-calendar>
+                </div>
                 <div style="margin-top: 10px;">
                   <button pButton class="btn btn-primary" type="submit">Submit</button>
                 </div>
@@ -67,7 +72,8 @@ justify-content: end;margin-top:10px;">
                 <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()" class="p-fluid">
                     <div class="field" style=" margin-top: 10px;" >
                       <label for="certificateName" class="form-label">Certificate Name</label>
-                      <input class="p-inputtext-sm" readonly pInputText type="text" id="certificateName"
+                      <input 
+                      class="p-inputtext-sm" readonly pInputText type="text" id="certificateName"
                              formControlName="certificateName" placeholder="Enter certificate name">
                     </div>
                   
@@ -85,10 +91,8 @@ justify-content: end;margin-top:10px;">
                     <div class="field" style="text-align: right; margin-top: 10px;">
                       <button pButton type="submit" label="Submit"></button>
                     </div>
-                  </form>
-                  
-            </div>
-            
+                  </form>         
+            </div>      
         </p-dialog>
     </div>
   </div>

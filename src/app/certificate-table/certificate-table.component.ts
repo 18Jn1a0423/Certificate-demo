@@ -10,142 +10,105 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./certificate-table.component.css']
 })
 export class CertificateTableComponent {
-  certificateList: any[] = [];
-  pdfUrl: string;
-  visible: boolean = false;
-  certificateNo: string;
-  tableRows = [
-    {
-      id: 1,
-      certificateName: 'Certificate 1',
-      userEmail: 'user1@example.com',
-      createdBy: 'Admin',
-      fileType: 'PDF',
-      reportManager: '2024-01-01',
-      expiryDate: '2024-12-31'
-    },
-    {
-      id: 2,
-      certificateName: 'Certificate 2',
-      userEmail: 'user2@example.com',
-      createdBy: 'Admin',
-      fileType: 'CSV',
-      reportManager: '2024-02-15',
-      expiryDate: '2024-11-15'
-    },
-    {
-      id: 3,
-      certificateName: 'Certificate 3',
-      userEmail: 'user3@example.com',
-      createdBy: 'User',
-      fileType: 'DOCX',
-      reportManager: '2024-03-20',
-      expiryDate: '2024-09-30'
-    }
-  ];
+
+  certificateList: any[]=[];
+  visible: boolean =false;
+  tableRows: any[]=[];
   certificateForm: FormGroup;
-  visibleEdit: boolean = false;
-  constructor(private http: HttpClient, private route:Router,private messageService: MessageService ) {
+  visibleEdit: boolean=false;
+
+  constructor(private http: HttpClient, private route: Router, private messageService: MessageService){
     this.certificateForm = new FormGroup({
       certificateName: new FormControl('', Validators.required),
-      userEmail: new FormControl('', [Validators.required, Validators.email]),
+      userEmail: new FormControl('',[Validators.required,Validators.email]),
       fileType: new FormControl('PDF', Validators.required)
     });
   }
 
-  ngOnInit(): void {
-  
-    this.loadCertificates();
+  ngOnInit(): void{
+    this.getAllCertificates();
   }
 
-
-  loadCertificates() {
-    // const fileTypes: string[] = ['pdf', 'csv', 'docx', 'xlsx'];
-    // this.http.get<any[]>(`http://localhost:7852/api/certificates/type?fileType=csv`)
-    //   .subscribe(data => {
-    //     this.certificateList = data;
-    //     console.log(this.certificateList);
-    //     this.tableRows = data.map(item => ({
-    //       certificateName: item.certificateName,
-    //       createDate: item.createDate,
-    //       expiryDate:  item.expiryDate,
-    //       fileData: item.fileData,
-    //       fileType: item.fileType,
-    //       userEmail: item.userEmail,
-    //       createdBy: item.createdBy,
-    //       reportManager: item.reportManager,
-    //       reportDirector: item.reportDirector
-    //     }));
-    //     console.log("this.tableRows",this.tableRows)
-    //   });
-  
-    this.http.get<any[]>(`http://localhost:7852/api/certificates/all`)
-      .subscribe((data) => {
-        console.log(data)
-        this.certificateList = data;
-        console.log(this.certificateList);
-        this.tableRows = data.map(item => ({
-          id:item.id,
-          certificateName: item.certificateName,
-          createDate: item.createDate,
-          expiryDate:  item.expiryDate,
-          fileData: item.fileData,
-          fileType: item.fileType,
-          userEmail: item.userEmail,
-          createdBy: item.createdBy,
-          reportManager: item.reportManager,
-          reportDirector: item.reportDirector
-        }));
-      });
-  }
-  // this.http.get<any[]>(`http://localhost:7852/api/certificates/type?fileType=pdf`)
-  editCertificate(certificateId: number) {
-    // this.route.navigate(["/certificate-update",certificateId]);
-
-    this.visibleEdit = true;
+  getAllCertificates(){
+    this.http.get<any[]>('http://localhost:8081/api/certificates/all')
+    .subscribe((data)=>{
+      console.log(data)
+      this.certificateList = data;
+      console.log(this.certificateList);
+      this.tableRows = data.map(item => ({
+        id:item.id,
+        certificateName:item.certificateName,
+        createDate:item.createDate,
+        expiryDate:item.expiryDate,
+        fileData:item.fileData,
+        fileType:item.fileType,
+        userEmail:item.userEmail,
+        createdBy:item.createdBy,
+        reportManager:item.reportManager,
+        reportDirector:item.reportDirector
+      }));
+    });
   }
 
-  // removeCertificate(email: string) {
-  
-  //   console.log(email)
-  //   this.http.delete(`http://localhost:7852/api/certificates/delete?userEmail=${email}`)
-  //     .subscribe((response) => {
-  //      console.log(response);
-  //      this.ngOnInit()
-  //     });
-  // }
-  addCertificate() {
-    this.http.post(`http://localhost:7852/api/certificates/add`,{})
+  addCertificates(){
+  this.http.post('http://localhost:8081/api/certificates/add',{})
+  .subscribe((response)=>{
+    console.log(response);
+    this.ngOnInit()
+  });
+  }showDialog(){
+    this.visible=true;
+  }addCertificateButton(){
+    this.route.navigate(["/insert-certificate"])
+  }
+
+  updateCertificate(id:number,data:{
+    certificateName: String,
+    createDate: String,
+    expiryDate: String,
+    fileData: String,
+    fileType: String,
+    userEmail: String,
+    createdBy: String,
+    reportManager: String,
+    reportDirector: String
+  }){this.http.put(`http://localhost:8081/api/certificates/update?id=${id}`, data,{responseType:'text'})
+  .subscribe((response)=>{
+    this.ngOnInit()
+  });
+}showDialog1(){
+  this.visible=true;
+}updateCertificateButton(){
+  this.route.navigate(["/update-certificate"])
+} showErrorMessage(data: string) {
+    this.messageService.add({ severity: 'error', summary: 'Failed', detail: `Certificate ${data} failed!`});
+  }showSuccessNessage(data:string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `Certificate ${data} successfully!` });
+  }
+
+  deleteCertificate(email: string) {
+    this.http.delete(`http://localhost:8081/api/certificates/delete?userEmail=${email}`)
       .subscribe((response) => {
-        console.log(response);
+       console.log(response);
+       this.ngOnInit()
       });
   }
-  showDialog() {
-    this.visible = true;
-}
-  addcertificateButton(){
 
-    this.route.navigate(["/certificate-post"])
-  }
-
-  downloadCertificate(id: number, fileType: string) {
-    console.log(id);
+  downloadCertificate(id: number, fileType: string) {  // change String to string
     const params = new HttpParams()
-      .set('Id', id.toString()) // Convert Long to string
-      .set('fileType', fileType);
-      console.log(id);
-    this.http.get(`http://localhost:7852/api/certificates/download`, { params, responseType: 'blob' })
+      .set('Id', id.toString())
+      .set('fileType', fileType);  // fileType is now a string
+    this.http.get(`http://localhost:8081/api/certificates/download`, { params, responseType: 'blob' })
       .subscribe((response: any) => {
         const blob = new Blob([response], { type: `application/${fileType}` });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `certificate.${fileType}`; // set the file name
+        a.download = `certificate.${fileType}`;  // Ensure the file is downloaded with the correct extension
         a.click();
         window.URL.revokeObjectURL(url);
       });
-  }
-  onSubmit() {
+  }onSubmit() {
     const today = new Date();
     console.log(this.certificateForm.value);
     const oneWeekFromToday = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -160,20 +123,26 @@ export class CertificateTableComponent {
       reportManager: "affijaroshan@gmail.com",
       reportDirector: "pavanireddyjeeri123@gmail.com"
     };
-    // const id = this.aroute.snapshot.paramMap.get('id');
-    this.http.put(`http://localhost:7852/api/certificates/update/1`, data,{responseType:'text'})
-      .subscribe((response) => {
-        console.log(response);
-        this.showSuccessMessage("Updated");
-        this.http.get(`http://localhost:7852/api/certificates/renew/1`,{responseType:'text'})
-      .subscribe((response) => {
-        console.log(response);
-        this.showSuccessMessage("Renewed")
-      });
-      });
-      
-  }
-  showSuccessMessage(data:string) {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: `Certificate ${data} successfully!` });
-  }
 }
+
+renewCertificate(certificateId: number) {
+  this.http.get(`http://localhost:8081/api/certificates/renew/${certificateId}`, { responseType: 'text' })
+    .subscribe(
+      (response) => {
+        console.log(response);  // Log the response from the server
+        this.showSuccessMessage("Renewed");  // Show success message
+      },
+      (error) => {
+        console.error('Error renewing certificate:', error);  // Log the error if any
+        this.showErrorMessage1("Error renewing certificate.");  // Show error message
+      }
+    );
+}showErrorMessage1(data: string) {
+  this.messageService.add({ severity: 'error', summary: 'Failed', detail: `Certificate ${data} failed!`});
+}showSuccessMessage(data:string) {
+  this.messageService.add({ severity: 'success', summary: 'Success', detail: `Certificate ${data} successfully!` });
+
+}
+
+}
+

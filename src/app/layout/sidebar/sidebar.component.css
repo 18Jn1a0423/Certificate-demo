@@ -9,10 +9,10 @@
   }
   
   .action-text {
-    display: block;
-    margin-left: 1rem;
-    font-size: 1.25rem;
-    /* background: url(images/hs-logo-01.svg) no-repeat top left; */
+    /* display: block; */
+    /* margin-left: 1rem; */
+    font-size: 1.50rem;
+    background: no-repeat top left; 
   }
   
   ul.main-nav {
