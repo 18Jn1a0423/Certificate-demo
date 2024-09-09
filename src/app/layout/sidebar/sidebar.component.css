@@ -9,10 +9,11 @@
   }
   
   .action-text {
-    display: block;
-    margin-left: 1rem;
+    display: flex;
+    /* margin-left: 1rem; */
     font-size: 1.25rem;
-    /* background: url(images/hs-logo-01.svg) no-repeat top left; */
+    justify-content: center;
+    margin-top: -10px;
   }
   
   ul.main-nav {
@@ -20,12 +21,6 @@
       margin: 1.25rem;
       font-size: 0.85rem;
       font-weight: 300;
-  
-      &:nth-child(2) {
-        margin: 1rem;
-        font-size: 1.5rem;
-        font-weight: 300;
-      }
     }
   }
   

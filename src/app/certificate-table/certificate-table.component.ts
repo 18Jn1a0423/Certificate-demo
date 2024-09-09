@@ -145,6 +145,11 @@ export class CertificateTableComponent {
         window.URL.revokeObjectURL(url);
       });
   }
+
+  deleteCertificate(item:any)
+  {
+    this.showError()
+  }
   onSubmit() {
     const today = new Date();
     console.log(this.certificateForm.value);
@@ -176,4 +181,7 @@ export class CertificateTableComponent {
   showSuccessMessage(data:string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: `Certificate ${data} successfully!` });
   }
+  showError() {
+    this.messageService.add({ severity: 'success', summary: '', detail: 'Deleted Succesfully' });
+}
 }

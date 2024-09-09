@@ -7,8 +7,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { CertificateTableComponent } from './certificate-table/certificate-table.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CertificateUpdateComponent } from './certificate-update/certificate-update.component';
-import { CertificatePostComponent } from './certificate-post/certificate-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
@@ -24,8 +22,7 @@ import { CalendarModule } from 'primeng/calendar';
     LayoutComponent,
     SidebarComponent,
     CertificateTableComponent,
-    CertificateUpdateComponent,
-    CertificatePostComponent
+
   ],
   imports: [
     BrowserModule,
