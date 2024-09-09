@@ -108,7 +108,8 @@ export class CertificateTableComponent {
         a.click();
         window.URL.revokeObjectURL(url);
       });
-  }onSubmit() {
+  }
+  onSubmit() {
     const today = new Date();
     console.log(this.certificateForm.value);
     const oneWeekFromToday = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -123,26 +124,21 @@ export class CertificateTableComponent {
       reportManager: "affijaroshan@gmail.com",
       reportDirector: "pavanireddyjeeri123@gmail.com"
     };
-}
-
-renewCertificate(certificateId: number) {
-  this.http.get(`http://localhost:8081/api/certificates/renew/${certificateId}`, { responseType: 'text' })
-    .subscribe(
-      (response) => {
-        console.log(response);  // Log the response from the server
-        this.showSuccessMessage("Renewed");  // Show success message
-      },
-      (error) => {
-        console.error('Error renewing certificate:', error);  // Log the error if any
-        this.showErrorMessage1("Error renewing certificate.");  // Show error message
-      }
-    );
-}showErrorMessage1(data: string) {
-  this.messageService.add({ severity: 'error', summary: 'Failed', detail: `Certificate ${data} failed!`});
-}showSuccessMessage(data:string) {
-  this.messageService.add({ severity: 'success', summary: 'Success', detail: `Certificate ${data} successfully!` });
-
-}
-
+    // const id = this.aroute.snapshot.paramMap.get('id');
+    this.http.put(`http://localhost:7852/api/certificates/update/1`, data,{responseType:'text'})
+      .subscribe((response) => {
+        console.log(response);
+        this.showSuccessMessage("Updated");
+        this.http.get(`http://localhost:7852/api/certificates/renew/1`,{responseType:'text'})
+      .subscribe((response) => {
+        console.log(response);
+        this.showSuccessMessage("Renewed")
+      });
+      });
+      
+  }
+  showSuccessMessage(data:string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: `Certificate ${data} successfully!` });
+  }
 }
 
