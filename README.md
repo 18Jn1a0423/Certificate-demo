@@ -49,7 +49,7 @@ The system needs to monitor certificates that are nearing their expiration date,
 
 API's
 
-**POST-localhost:8081/api/certificates/add**
+**POST-http://localhost:8081/api/certificates/add**
 
 {
 
