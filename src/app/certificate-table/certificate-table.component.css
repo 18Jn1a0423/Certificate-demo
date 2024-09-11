@@ -11,3 +11,8 @@
 ::ng-deep .p-button.p-button-icon-only {
     padding: 0.3rem 0;
 }
+
+.ui-paginator {
+    display: block;
+  }
+  

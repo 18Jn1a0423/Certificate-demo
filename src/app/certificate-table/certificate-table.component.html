@@ -25,20 +25,25 @@ justify-content: end;margin-top:10px;">
         <td>{{ item.expiryDate }}</td>
         <td>{{ item.reportManager }}</td>
         <td style="display: flex;gap:10px;">
-          <button pButton type="button" size="small" icon="pi pi-pencil" class="p-button-outlined p-button-warning"  (click)="editCertificate(item.id)">Edit</button>
-          <button pButton type="button" size="small" icon="pi pi-download" class="p-button-outlined p-button-secondary" (click)="downloadCertificate(item.id, item.fileType)">Download</button>
-          <button pButton type="button" size="small" icon="pi pi-download" class="p-button-outlined "severity="danger" (click)="deleteCertificate(item.id)">Delete</button>
+          <button pButton type="button" size="small" icon="pi pi-pencil" class="p-button-outlined p-button-warning"  (click)="updateCertificate(item.id)"></button>
+          <button pButton type="button" size="small" icon="pi pi-download" class="p-button-outlined p-button-secondary" (click)="downloadCertificate(item.id, item.fileType)"></button>
+          <button pButton type="button" size="small" icon="pi pi-trash" class="p-button-outlined "severity="danger" (click)="deleteCertificate(item.userEmail)"></button>
         </td>
       </tr>
     </ng-template>
   </p-table>
-  
+  <mat-paginator [length]="certificateList.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
+
 
   <div>
     <div class="card flex justify-content-center">
-        <p-dialog header="Add Certificate" [(visible)]="visible"  [style]="{width: '30vw', 'height':'60vh'}">
-            <p-toast />
-            <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()" class="p-grid">
+        <p-dialog header="Add Certificate" [(visible)]="addForm"  [style]="{width: '30vw', 'height':'50vh'}">
+          
+            <form [formGroup]="certificateForm" (ngSubmit)="addCertificates()" class="p-grid">
                 <div  style=" margin-top: 10px;display: grid;" >
                   <label for="certificateName" class="form-label">Certificate Name</label>
                   <input class="p-inputtext-sm"  pInputText type="text" id="certificateName"
@@ -48,7 +53,13 @@ justify-content: end;margin-top:10px;">
                 <div  style=" margin-top: 10px;display: grid;">
                   <label for="userEmail" class="form-label">User Email</label>
                   <input class="p-inputtext-sm"  pInputText type="email" id="userEmail"
-                         formControlName="userEmail" placeholder="email@example.com">
+                         formControlName="userEmail" placeholder="email@gmail.com">
+                </div>
+
+                <div  style=" margin-top: 10px;display: grid;">
+                  <label for="fileType" class="form-label">File Type</label>
+                  <input class="p-inputtext-sm"  pInputText type="fileType" id="fileType"
+                         formControlName="fileType" placeholder="Enter File Name">
                 </div>
               
                 <div  style=" margin-top: 10px;display: grid;">
@@ -71,8 +82,9 @@ justify-content: end;margin-top:10px;">
 
   <div>
     <div class="card flex justify-content-center">
-        <p-dialog header="Update Certificate" [(visible)]="visibleEdit" [style]="{width: '30vw', 'height':'60vh'}">
-            <p-toast />
+
+        <p-dialog header="Update Certificate" [(visible)]="visibleEdit" [style]="{width: '30vw', 'height':'50vh'}">
+
             <div>
                 <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()" class="p-grid">
                     <div  style=" margin-top: 10px;display: grid;" >
@@ -85,19 +97,23 @@ justify-content: end;margin-top:10px;">
                     <div  style=" margin-top: 10px;display: grid;">
                       <label for="userEmail" class="form-label">User Email</label>
                       <input class="p-inputtext-sm" readonly pInputText type="email" id="userEmail"
-                             formControlName="userEmail" placeholder="email@example.com">
+                             formControlName="userEmail" placeholder="email@gmail.com">
                     </div>
                   
                     <div  style=" margin-top: 10px;display: grid;">
                       <label for="expiryDate" class="form-label">Expiry Date</label>
-                      <p-calendar appendTo="body" id="expiryDate" [style]="{'width':'100%'}" [showIcon]="true" formControlName="expiryDate" placeholder="DD/MM/YYYY"></p-calendar>
+                      <p-calendar appendTo="body" id="expiryDate"  [style]="{'width':'100%'}" [showIcon]="true" formControlName="expiryDate"    dateFormat="yy-mm-dd" placeholder="DD/MM/YYYY"></p-calendar>
                     </div>
                   
                     <div  style="text-align: right; margin-top: 10px;">
-                      <button pButton type="submit" label="Submit"></button>
+                      <button pButton type="submit" (click)="updateSubmitForm(filteredData[0].id)" label="Submit"></button>
                     </div>
                   </form>         
-            </div>      
+            </div> 
+     
         </p-dialog>
     </div>
   </div>
+
+
+

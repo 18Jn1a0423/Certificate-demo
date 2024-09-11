@@ -1,0 +1,8 @@
+@import "primeicons/primeicons.css";
+body, html {
+    font-family: 'Inter var', sans-serif;
+}
+.pi {
+    font-family: 'PrimeIcons' !important; /* Ensure PrimeIcons font is enforced */
+    font-style: normal;
+}
